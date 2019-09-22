@@ -18,12 +18,23 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
+    // TODO app constantly crashing. Fix fast.
     private AppBarConfiguration mAppBarConfiguration;
+    RecyclerView recyclerView;
+    Article.ArticleAdapter adapter;
+    private ArrayList<Article> listContentArray= new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Do we need this button? maybe for search?", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -51,6 +62,38 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        recyclerView=(RecyclerView)findViewById(R.id.recycleView);
+        //As explained in the tutorial, LineatLayoutManager tells the RecyclerView that the view
+        //must be arranged in linear fashion
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter=new Article.ArticleAdapter(this);
+        //Method call for populating the view
+        populateRecyclerViewValues();
+
+    }
+
+    private void populateRecyclerViewValues() {
+        /** This is where we pass the data to the adpater using POJO class.
+         *  The for loop here is optional. I've just populated same data for 50 times.
+         *  You can use a JSON object request to gather the required values and populate in the
+         *  RecyclerView.
+         * */
+        for(int iter=1;iter<=50;iter++) {
+            //Creating POJO class object
+            Article pojoObject = new Article();
+            //Values are binded using set method of the POJO class
+            pojoObject.setArticleContentSummary("About the Rivers of India");
+            pojoObject.setArticleContent("This is bad for the rivers "+iter);
+            pojoObject.setArticleDate(new Date(12101998L));
+            //After setting the values, we add all the Objects to the array
+            //Hence, listConentArr is a collection of Array of POJO objects
+            listContentArray.add(pojoObject);
+        }
+        //We set the array to the adapter
+        adapter.setListContent(listContentArray);
+        //We in turn set the adapter to the RecyclerView
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
