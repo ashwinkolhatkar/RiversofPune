@@ -24,6 +24,14 @@ public class Article { // POJO to store articles in Database in the future.
     series of images in ImageView.
     In db implementation, maybe the pics can be downloaded prior to use in a cache? */
 
+    public String getArticleTitle() {
+        return articleTitle;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
+    }
+
     public String getArticleContentSummary() {
         return articleContentSummary;
     }
@@ -73,8 +81,9 @@ public class Article { // POJO to store articles in Database in the future.
         public void onBindViewHolder(@NonNull final ArticleButtonViewHolder holder, int position) {
             Article list_items=list_members.get(position);
             holder.content_summary.setText(list_items.getArticleContentSummary());
-            holder.content.setText(list_items.getArticleContent());
+            //holder.content.setText(list_items.getArticleContent());
             holder.date.setText(list_items.getArticleDate().toString());
+            holder.title.setText(list_items.getArticleTitle());
         }
 
         public void setListContent(ArrayList<Article> list_members){
@@ -88,13 +97,14 @@ public class Article { // POJO to store articles in Database in the future.
         }
 
         class ArticleButtonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-            TextView content_summary,date,content;
+            TextView content_summary,date,content, title;
             public ArticleButtonViewHolder(View itemView) {
                 super(itemView);
                 itemView.setOnClickListener(this);
                 content_summary=(TextView)itemView.findViewById(R.id.content_summary);
-                content=(TextView)itemView.findViewById(R.id.content);
+                //content=(TextView)itemView.findViewById(R.id.content);
                 date=(TextView)itemView.findViewById(R.id.date);
+                title = (TextView)itemView.findViewById(R.id.article_title);
                 // TODO Add ImageViews as well.
 
             }

@@ -83,9 +83,11 @@ public class MainActivity extends AppCompatActivity {
             //Creating POJO class object
             Article pojoObject = new Article();
             //Values are binded using set method of the POJO class
-            pojoObject.setArticleContentSummary("About the Rivers of India");
-            pojoObject.setArticleContent("This is bad for the rivers "+iter);
+            pojoObject.setArticleContentSummary("We need to save the river. ");
+            //pojoObject.setArticleContent("This is bad for the rivers. A lot in article. etc. "+iter);
+            // TODO maybe set content when the card is clicked rather than now?
             pojoObject.setArticleDate(new Date(12101998L));
+            pojoObject.setArticleTitle("Mula Mutha River in peril!!");
             //After setting the values, we add all the Objects to the array
             //Hence, listConentArr is a collection of Array of POJO objects
             listContentArray.add(pojoObject);
