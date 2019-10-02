@@ -1,16 +1,16 @@
-package com.example.riversofpune.ui.tools;
+package com.example.riversofpune.ui.riverevents;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ToolsViewModel extends ViewModel {
+public class RiverEventsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ToolsViewModel() {
+    public RiverEventsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is tools fragment");
+        mText.setValue("This is slideshow fragment");
     }
 
     public LiveData<String> getText() {

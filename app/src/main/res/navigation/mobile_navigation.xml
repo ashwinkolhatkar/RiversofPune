@@ -12,21 +12,27 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.riversofpune.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:id="@+id/nav_rivermaps"
+        android:name="com.example.riversofpune.ui.rivermaps.RiverMapsFragment"
+        android:label="@string/menu_rivermaps"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.riversofpune.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:id="@+id/nav_riverevents"
+        android:name="com.example.riversofpune.ui.riverevents.RiverEventsFragment"
+        android:label="@string/menu_riverevents"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.riversofpune.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
+        android:id="@+id/nav_history"
+        android:name="com.example.riversofpune.ui.riverhistory.RiverHistoryFragment"
+        android:label="@string/menu_riverhistory"
+        tools:layout="@layout/fragment_tools" />
+
+    <fragment
+        android:id="@+id/nav_adoptstretch"
+        android:name="com.example.riversofpune.ui.riverhistory.RiverHistoryFragment"
+        android:label="@string/menu_adoptstretch"
         tools:layout="@layout/fragment_tools" />
 
     <fragment

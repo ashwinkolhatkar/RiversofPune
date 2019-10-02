@@ -1,4 +1,4 @@
-package com.example.riversofpune.ui.tools;
+package com.example.riversofpune.ui.rivermaps;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.riversofpune.R;
 
-public class ToolsFragment extends Fragment {
+public class RiverMapsFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
+    private RiverMapsViewModel riverMapsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_tools, container, false);
-        final TextView textView = root.findViewById(R.id.text_tools);
-        toolsViewModel.getText().observe(this, new Observer<String>() {
+        riverMapsViewModel =
+                ViewModelProviders.of(this).get(RiverMapsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        final TextView textView = root.findViewById(R.id.text_gallery);
+        riverMapsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
