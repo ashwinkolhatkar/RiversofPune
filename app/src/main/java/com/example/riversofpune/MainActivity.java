@@ -1,17 +1,14 @@
 package com.example.riversofpune;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.riversofpune.adapters.ArticleAdapter;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -26,12 +23,11 @@ import android.view.Menu;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ArticleAdapter.OnArticleListener {
 
-    // TODO app constantly crashing. Fix fast.
     private AppBarConfiguration mAppBarConfiguration;
     RecyclerView recyclerView;
-    Article.ArticleAdapter adapter;
+    ArticleAdapter adapter;
     private ArrayList<Article> listContentArray= new ArrayList<>();
 
 
@@ -61,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         //As explained in the tutorial, LineatLayoutManager tells the RecyclerView that the view
         //must be arranged in linear fashion
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new Article.ArticleAdapter(this);
+        adapter=new ArticleAdapter(listContentArray,this);
         //Method call for populating the view
         populateRecyclerViewValues();
 
@@ -69,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateRecyclerViewValues() {
         /** This is where we pass the data to the adpater using POJO class.
-         *  The for loop here is optional. I've just populated same data for 50 times.
+         *  RecyclerView has been used for easy database integration.
          *  You can use a JSON object request to gather the required values and populate in the
          *  RecyclerView.
          * */
@@ -78,17 +74,12 @@ public class MainActivity extends AppCompatActivity {
             Article pojoObject = new Article();
             //Values are binded using set method of the POJO class
             pojoObject.setArticleContentSummary("We need to save the river. ");
-            //pojoObject.setArticleContent("This is bad for the rivers. A lot in article. etc. "+iter);
-            // TODO maybe set content when the card is clicked rather than now?
+            pojoObject.setArticleContent("https://www.sitpune.edu.in/#");
             pojoObject.setArticleDate(new Date(12101998L));
             pojoObject.setArticleTitle("Mula Mutha River in peril!!");
-            //After setting the values, we add all the Objects to the array
-            //Hence, listConentArr is a collection of Array of POJO objects
             listContentArray.add(pojoObject);
         }
-        //We set the array to the adapter
         adapter.setListContent(listContentArray);
-        //We in turn set the adapter to the RecyclerView
         recyclerView.setAdapter(adapter);
     }
 
@@ -104,5 +95,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onArticleClick(int position) {
+        listContentArray.get(position);
+        Intent intent = new Intent(this, ArticleActivity.class);
+        startActivity(intent);
     }
 }
