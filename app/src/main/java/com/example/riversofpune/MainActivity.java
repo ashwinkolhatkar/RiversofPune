@@ -1,35 +1,32 @@
 package com.example.riversofpune;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.riversofpune.adapters.ArticleAdapter;
+import com.example.riversofpune.ui.adoptstretch.RiverAdoptFragment;
+import com.example.riversofpune.ui.home.HomeFragment;
+import com.example.riversofpune.ui.riverevents.RiverEventsFragment;
+import com.example.riversofpune.ui.riverhistory.RiverHistoryFragment;
+import com.example.riversofpune.ui.rivermaps.RiverMapsFragment;
+import com.example.riversofpune.ui.send.SendFragment;
+import com.example.riversofpune.ui.share.ShareFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.Menu;
-
-import java.util.ArrayList;
-import java.util.Date;
-
-public class MainActivity extends AppCompatActivity implements ArticleAdapter.OnArticleListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
-    RecyclerView recyclerView;
-    ArticleAdapter adapter;
-    private ArrayList<Article> listContentArray= new ArrayList<>();
-
+    private FragmentTransaction fragmentTransaction;
 
 
     @Override
@@ -53,35 +50,8 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        recyclerView=(RecyclerView)findViewById(R.id.recycleView);
-        //As explained in the tutorial, LineatLayoutManager tells the RecyclerView that the view
-        //must be arranged in linear fashion
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new ArticleAdapter(listContentArray,this);
-        //Method call for populating the view
-        populateRecyclerViewValues();
-
     }
 
-    private void populateRecyclerViewValues() {
-        /** This is where we pass the data to the adpater using POJO class.
-         *  RecyclerView has been used for easy database integration.
-         *  You can use a JSON object request to gather the required values and populate in the
-         *  RecyclerView.
-         * */
-        for(int iter=1;iter<=50;iter++) {
-            //Creating POJO class object
-            Article pojoObject = new Article();
-            //Values are binded using set method of the POJO class
-            pojoObject.setArticleContentSummary("We need to save the river. ");
-            pojoObject.setArticleContent("https://www.sitpune.edu.in/#");
-            pojoObject.setArticleDate(new Date(12101998L));
-            pojoObject.setArticleTitle("Mula Mutha River in peril!!");
-            listContentArray.add(pojoObject);
-        }
-        adapter.setListContent(listContentArray);
-        recyclerView.setAdapter(adapter);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -98,9 +68,60 @@ public class MainActivity extends AppCompatActivity implements ArticleAdapter.On
     }
 
     @Override
-    public void onArticleClick(int position) {
-        listContentArray.get(position);
-        Intent intent = new Intent(this, ArticleActivity.class);
-        startActivity(intent);
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        if (id == R.id.nav_home) {
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.main_container, new HomeFragment());
+            getSupportActionBar().setTitle("Home");
+            fragmentTransaction.commit();
+            menuItem.setChecked(true);
+
+        } else if (id == R.id.nav_rivermaps) {
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.main_container, new RiverMapsFragment());
+            getSupportActionBar().setTitle("RiverMaps");
+            fragmentTransaction.commit();
+            menuItem.setChecked(true);
+
+        } else if (id == R.id.nav_riverevents) {
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.main_container, new RiverEventsFragment());
+            getSupportActionBar().setTitle("Events by the River");
+            fragmentTransaction.commit();
+            menuItem.setChecked(true);
+
+        } else if (id == R.id.nav_history) {
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.main_container, new RiverHistoryFragment());
+            getSupportActionBar().setTitle("History of the River");
+            fragmentTransaction.commit();
+            menuItem.setChecked(true);
+
+        } else if (id == R.id.nav_adoptstretch) {
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.main_container, new RiverAdoptFragment());
+            getSupportActionBar().setTitle("Adopt a Stretch of River Mula Mutha");
+            fragmentTransaction.commit();
+            menuItem.setChecked(true);
+
+        } else if (id == R.id.nav_share) {
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.main_container, new ShareFragment());
+            getSupportActionBar().setTitle("Share this app :)");
+            fragmentTransaction.commit();
+            menuItem.setChecked(true);
+
+        } else if (id == R.id.nav_send) {
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.main_container, new SendFragment());
+            getSupportActionBar().setTitle("Contact Us");
+            fragmentTransaction.commit();
+            menuItem.setChecked(true);
+
+        } else {
+
+        }
+        return false;
     }
 }
