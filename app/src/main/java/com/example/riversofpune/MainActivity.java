@@ -5,8 +5,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -23,11 +25,11 @@ import com.example.riversofpune.ui.send.SendFragment;
 import com.example.riversofpune.ui.share.ShareFragment;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FragmentTransaction fragmentTransaction;
-
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +39,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_rivermaps, R.id.nav_riverevents,
-                R.id.nav_history, R.id.nav_adoptstretch,R.id.nav_share, R.id.nav_send)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        //navigationView.setNavigationItemSelectedListener(this);
+
+        /**
+         // Passing each menu ID as a set of Ids because each
+         // menu should be considered as top level destinations.
+         mAppBarConfiguration = new AppBarConfiguration.Builder(
+         R.id.nav_home, R.id.nav_rivermaps, R.id.nav_riverevents,
+         R.id.nav_history, R.id.nav_adoptstretch,R.id.nav_share, R.id.nav_send)
+         .setDrawerLayout(drawer)
+         .build();
+         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+         NavigationUI.setupWithNavController(navigationView, navController);
+         **/
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.open_drawer_content_desc, R.string.close_drawer_content_desc);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        /**
+         if(savedInstanceState == null){
+         fragmentTransaction = getSupportFragmentManager().beginTransaction();
+         fragmentTransaction.replace(R.id.main_container, new HomeFragment());
+         getSupportActionBar().setTitle("Home");
+         fragmentTransaction.commit();
+         navigationView.setCheckedItem(R.id.nav_home);
+         }
+         **/
+
 
     }
 
@@ -60,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -67,8 +90,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 || super.onSupportNavigateUp();
     }
 
+
+
+    /*
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+    }
+     */
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
         if (id == R.id.nav_home) {
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -123,5 +155,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

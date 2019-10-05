@@ -40,7 +40,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         Article list_items=list_members.get(position);
         holder.content_summary.setText(list_items.getArticleContentSummary());
         //holder.content.setText(list_items.getArticleContent());
-        holder.date.setText(list_items.getArticleDate().toString());
+        //holder.date.setText(list_items.getArticleDate().toString());
         holder.title.setText(list_items.getArticleTitle());
     }
 
@@ -61,7 +61,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             super(itemView);
             content_summary=(TextView)itemView.findViewById(R.id.content_summary);
             //content=(TextView)itemView.findViewById(R.id.content);
-            date=(TextView)itemView.findViewById(R.id.date);
+            //date=(TextView)itemView.findViewById(R.id.date);
             title = (TextView)itemView.findViewById(R.id.article_title);
             this.onArticleListener = onArticleListener;
             itemView.setOnClickListener(this);

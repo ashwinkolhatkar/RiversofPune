@@ -1,15 +1,10 @@
 package com.example.riversofpune;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
-import android.webkit.WebView;
 
 public class ArticleActivity extends AppCompatActivity {
 
@@ -23,7 +18,9 @@ public class ArticleActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         WebView webView = findViewById(R.id.article_web_view);
-        webView.loadUrl("https://www.sitpune.edu.in/#");
+        String currlink1 = "file:///android_asset/sample_file1/samplefileecosia.html";
+        String currlink = "file:///android_asset/sample_file2/17thCentuary_change.docx.html";
+        webView.loadUrl(currlink);
     }
 
 }
