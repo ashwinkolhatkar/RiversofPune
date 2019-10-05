@@ -1,5 +1,6 @@
 package com.example.riversofpune.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,16 +18,20 @@ import com.example.riversofpune.Article;
 import com.example.riversofpune.ArticleActivity;
 import com.example.riversofpune.R;
 import com.example.riversofpune.adapters.ArticleAdapter;
+import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class HomeFragment extends Fragment implements ArticleAdapter.OnArticleListener {
+    private static final String TAG = "HomeFragment";
 
     private HomeViewModel homeViewModel;
     RecyclerView recyclerView;
     ArticleAdapter adapter;
     private ArrayList<Article> listContentArray = new ArrayList<>();
+    private ArrayList<String> articleFileList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +47,14 @@ public class HomeFragment extends Fragment implements ArticleAdapter.OnArticleLi
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
         adapter = new ArticleAdapter(listContentArray, this);
+
+        articleFileList = new ArrayList<>();
+        articleFileList.add("article1");
+        articleFileList.add("article1");
+        articleFileList.add("article1");
+        articleFileList.add("article1");
+        articleFileList.add("article1");
+
         //Method call for populating the view
         populateRecyclerViewValues();
     }
@@ -52,7 +65,8 @@ public class HomeFragment extends Fragment implements ArticleAdapter.OnArticleLi
          *  You can use a JSON object request to gather the required values and populate in the
          *  RecyclerView.
          * */
-        for (int iter = 1; iter <= 50; iter++) {
+        for (int iter = 0; iter < articleFileList.size(); iter++) {
+            /**
             //Creating POJO class object
             Article pojoObject = new Article();
             //Values are binded using set method of the POJO class
@@ -60,7 +74,14 @@ public class HomeFragment extends Fragment implements ArticleAdapter.OnArticleLi
             pojoObject.setArticleContent("https://www.sitpune.edu.in/#");
             pojoObject.setArticleDate(new Date(12101998L));
             pojoObject.setArticleTitle("Mula Mutha River in peril!!");
-            listContentArray.add(pojoObject);
+             Gson gson = new Gson();
+             Log.d(TAG, "populateRecyclerViewValues: "+gson.toJson(pojoObject));
+             **/
+
+            Gson gson = new Gson();
+            String articleId = articleFileList.get(iter);
+            Article articlePojo = gson.fromJson(loadJSONFromAsset(getContext(), articleId), Article.class);
+            listContentArray.add(articlePojo);
         }
         adapter.setListContent(listContentArray);
         recyclerView.setAdapter(adapter);
@@ -72,4 +93,21 @@ public class HomeFragment extends Fragment implements ArticleAdapter.OnArticleLi
         Intent intent = new Intent(getContext(), ArticleActivity.class);
         startActivity(intent);
     }
+
+    public String loadJSONFromAsset(Context context, String articleId) {
+        String json = null;
+        try {
+            InputStream is = context.getAssets().open(articleId + "/" + articleId + ".json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
 }
