@@ -14,13 +14,14 @@ public class ArticleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_article);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Article Activity");
+        setTitle(getIntent().getStringExtra("title"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         WebView webView = findViewById(R.id.article_web_view);
-        String currlink1 = "file:///android_asset/sample_file1/samplefileecosia.html";
-        String currlink = "file:///android_asset/sample_file2/17thCentuary_change.docx.html";
-        webView.loadUrl(currlink);
+        //String currlink1 = "file:///android_asset/sample_file1/samplefileecosia.html";
+        String aid = getIntent().getStringExtra("content_link");
+        String currLink = "file:///android_asset/" + aid + "/" + aid + ".html";
+        webView.loadUrl(currLink);
     }
 
 }

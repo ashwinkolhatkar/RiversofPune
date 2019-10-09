@@ -50,6 +50,7 @@ public class HomeFragment extends Fragment implements ArticleAdapter.OnArticleLi
 
         articleFileList = new ArrayList<>();
         articleFileList.add("article1");
+        articleFileList.add("a1");
         articleFileList.add("article1");
         articleFileList.add("article1");
         articleFileList.add("article1");
@@ -89,8 +90,10 @@ public class HomeFragment extends Fragment implements ArticleAdapter.OnArticleLi
 
     @Override
     public void onArticleClick(int position) {
-        listContentArray.get(position);
+        Article article = listContentArray.get(position);
         Intent intent = new Intent(getContext(), ArticleActivity.class);
+        intent.putExtra("title", article.getArticleTitle());
+        intent.putExtra("content_link", article.getArticleContent());
         startActivity(intent);
     }
 
