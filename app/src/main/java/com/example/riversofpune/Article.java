@@ -1,15 +1,5 @@
 package com.example.riversofpune;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Article { // POJO to store articles in Database in the future.
@@ -17,7 +7,7 @@ public class Article { // POJO to store articles in Database in the future.
     private String articleContent;
     private String articleTitle;
     private Date articleDate;
-    private String[] sources;
+    private String thumbnailPath;
 
 
     private String[] imageLinks; /* TODO array of links to images --> find how to change array of images to
@@ -54,5 +44,13 @@ public class Article { // POJO to store articles in Database in the future.
 
     public void setArticleDate(Date articleDate) {
         this.articleDate = articleDate;
+    }
+
+    public String getThumbnailPath() {
+        return thumbnailPath;
+    }
+
+    public void setThumbnailPath(String thumbnailPath) {
+        this.thumbnailPath = thumbnailPath;
     }
 }

@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.riversofpune.Article;
 import com.example.riversofpune.R;
 
@@ -42,6 +44,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         //holder.content.setText(list_items.getArticleContent());
         //holder.date.setText(list_items.getArticleDate().toString());
         holder.title.setText(list_items.getArticleTitle());
+        Article article = list_members.get(position);
+        Glide.with(holder.thumbnail).load("file:///android_asset/" + article.getArticleContent() +
+                "/" + article.getThumbnailPath()).into(holder.thumbnail);
+        //holder.thumbnail.setImageResource();
     }
 
     public void setListContent(ArrayList<Article> list_members){
@@ -56,6 +62,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     static class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView content_summary,date,content, title;
+        ImageView thumbnail;
         OnArticleListener onArticleListener;
         public ArticleViewHolder(View itemView, OnArticleListener onArticleListener) {
             super(itemView);
@@ -63,6 +70,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
             //content=(TextView)itemView.findViewById(R.id.content);
             //date=(TextView)itemView.findViewById(R.id.date);
             title = (TextView)itemView.findViewById(R.id.article_title);
+            thumbnail = (ImageView) itemView.findViewById(R.id.picture);
             this.onArticleListener = onArticleListener;
             itemView.setOnClickListener(this);
 
