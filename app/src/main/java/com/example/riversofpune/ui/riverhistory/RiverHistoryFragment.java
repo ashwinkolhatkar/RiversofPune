@@ -22,7 +22,7 @@ public class RiverHistoryFragment extends Fragment {
                 ViewModelProviders.of(this).get(RiverHistoryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_history, container, false);
 
-        WebView webView = getActivity().findViewById(R.id.history_webview);
+        WebView webView = root.findViewById(R.id.history_webview);
         webView.loadUrl("www.google.com");
         return root;
     }

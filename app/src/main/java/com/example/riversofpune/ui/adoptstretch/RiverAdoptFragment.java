@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,15 +20,16 @@ public class RiverAdoptFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_river_adopt, container, false);
-
-        WebView webView = getActivity().findViewById(R.id.history_webview);
-        webView.loadUrl("https://www.jeevitnadi.org/adopt-river-stretch-program/");
-
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
+        WebView webView = view.findViewById(R.id.adoptstretch_webview);
+        webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.loadUrl("https://www.jeevitnadi.org/adopt-river-stretch-program/");
     }
 }
