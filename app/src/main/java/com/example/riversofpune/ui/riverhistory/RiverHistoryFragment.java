@@ -23,7 +23,8 @@ public class RiverHistoryFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_history, container, false);
 
         WebView webView = root.findViewById(R.id.history_webview);
-        webView.loadUrl("www.google.com");
+        String aid = "history_of_the_river";
+        webView.loadUrl("file:///android_asset/" + aid + "/" + aid + ".html");
         return root;
     }
 }

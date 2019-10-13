@@ -49,12 +49,24 @@ public class HomeFragment extends Fragment implements ArticleAdapter.OnArticleLi
         adapter = new ArticleAdapter(listContentArray, this);
 
         articleFileList = new ArrayList<>();
-        articleFileList.add("article1");
+        articleFileList.add("a1_old");
+        articleFileList.add("a2_old");
+
         articleFileList.add("a1");
-        articleFileList.add("article1");
-        articleFileList.add("article1");
-        articleFileList.add("article1");
-        articleFileList.add("article1");
+        articleFileList.add("a2");
+        articleFileList.add("a3");
+        articleFileList.add("a4");
+        articleFileList.add("a5");
+        articleFileList.add("a6");
+        articleFileList.add("a7");
+
+        articleFileList.add("m1");
+        articleFileList.add("m2");
+        articleFileList.add("m3");
+        articleFileList.add("m4");
+        articleFileList.add("m5");
+        articleFileList.add("m6");
+        articleFileList.add("m7");
 
         //Method call for populating the view
         populateRecyclerViewValues();
