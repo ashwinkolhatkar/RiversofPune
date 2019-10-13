@@ -10,7 +10,7 @@ public class RiverMapsViewModel extends ViewModel {
 
     public RiverMapsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("Maps of Mula-mutha river");
     }
 
     public LiveData<String> getText() {

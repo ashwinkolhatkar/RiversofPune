@@ -1,5 +1,6 @@
 package com.example.riversofpune;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,8 +20,6 @@ import com.example.riversofpune.ui.home.HomeFragment;
 import com.example.riversofpune.ui.riverevents.RiverEventsFragment;
 import com.example.riversofpune.ui.riverhistory.RiverHistoryFragment;
 import com.example.riversofpune.ui.rivermaps.RiverMapsFragment;
-import com.example.riversofpune.ui.send.SendFragment;
-import com.example.riversofpune.ui.share.ShareFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -136,18 +135,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             menuItem.setChecked(true);
 
         } else if (id == R.id.nav_share) {
+            /*
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new ShareFragment());
             getSupportActionBar().setTitle("Share this app :)");
             fragmentTransaction.commit();
             //menuItem.setChecked(true);
+             */
+            String playstore_link = "https://www.jeevitnadi.org";
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,
+                    "Help Pune's Rivers breathe with life again: " + playstore_link);
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
 
         } else if (id == R.id.nav_send) {
+            /*
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new SendFragment());
             getSupportActionBar().setTitle("Contact Us");
             fragmentTransaction.commit();
             //menuItem.setChecked(true);
+             */
+            String jeevitnadi_email = "jeevitnadi@gmail.com";
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/html");
+            intent.putExtra(Intent.EXTRA_EMAIL, jeevitnadi_email);
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+            intent.putExtra(Intent.EXTRA_TEXT, "your message here...");
+            startActivity(Intent.createChooser(intent, "Send Email"));
 
         } else {
         }
