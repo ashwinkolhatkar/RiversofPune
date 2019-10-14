@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String jeevitnadi_email = "jeevitnadi@gmail.com";
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/html");
-            intent.putExtra(Intent.EXTRA_EMAIL, jeevitnadi_email);
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[]{jeevitnadi_email});
             intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
             intent.putExtra(Intent.EXTRA_TEXT, "your message here...");
             startActivity(Intent.createChooser(intent, "Send Email"));

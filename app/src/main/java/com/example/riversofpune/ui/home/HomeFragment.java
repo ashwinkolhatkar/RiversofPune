@@ -49,24 +49,24 @@ public class HomeFragment extends Fragment implements ArticleAdapter.OnArticleLi
         adapter = new ArticleAdapter(listContentArray, this);
 
         articleFileList = new ArrayList<>();
-        articleFileList.add("a1_old");
-        articleFileList.add("a2_old");
+        //articleFileList.add("a1_old"); // Impact on birds
+        articleFileList.add("a2_old");  // Toxin-free lifestyle
 
-        articleFileList.add("a1");
-        articleFileList.add("a2");
-        articleFileList.add("a3");
-        articleFileList.add("a4");
-        articleFileList.add("a5");
-        articleFileList.add("a6");
-        articleFileList.add("a7");
+        articleFileList.add("a1");  // Impact on birds
+        articleFileList.add("a2");  // Impact on fauna
+        articleFileList.add("a3");  // Pune developed in the cradle of the mutha (RnR)
+        articleFileList.add("a4");  // Present State of the River
+        articleFileList.add("a5");  // Rights and Responsibilities
+        articleFileList.add("a6");  // Rivers from Pune carry most polluted water
+        articleFileList.add("a7");  // Steps to ensure River cleanliness
 
-        articleFileList.add("m1");
-        articleFileList.add("m2");
-        articleFileList.add("m3");
-        articleFileList.add("m4");
-        articleFileList.add("m5");
-        articleFileList.add("m6");
-        articleFileList.add("m7");
+        articleFileList.add("m1");  // Rivers from Pune carry most polluted water
+        articleFileList.add("m2");  // Age and History of the River [COMPLETE]
+        articleFileList.add("m3");  // The Present state of the River
+        articleFileList.add("m4");  // Red Lines and Blue lines FAQ
+        articleFileList.add("m5");  // Pune will see clean mula-mutha soon - Javadekar
+        articleFileList.add("m6");  // Pune River development project
+        articleFileList.add("m7");  // 7 ways to keep lakes and rivers pollution free.
 
         //Method call for populating the view
         populateRecyclerViewValues();
